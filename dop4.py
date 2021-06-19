@@ -34,8 +34,8 @@ class ListClass(Resource):
     def get(self):
         """Получение всего хранимого массива"""
         global ls
-        ls=[sick for sick in ls]
-        return { 'array': ls}
+        #ls=[sick for sick in ls]
+        return {'array': ls}
     @name_space1.doc("")
     # ожидаем на входе данных в соответствии с моделью list_
     @name_space1.expect(list_)
