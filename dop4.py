@@ -196,7 +196,7 @@ class deletemaxDead(Resource):
         return { 'array': ls}
     
     
-'''#STATISTICS
+#STATISTICS
 # маршалинг данных в соответствии с list_
 @name_space1.marshal_with(list_)
 def patch(self):
@@ -205,8 +205,9 @@ def patch(self):
         aver=sum([sick['recovered'] for sick in ls ])/len(ls)
         for sick in ls:
           if(sick["recovered"] >= aver):
-            
-                return { 'array': ls}'''
+            temp=sick["recovered"]/100*10
+            sick["recovered"]=temp+sick["recovered"]
+        return { 'array': ls}
         
     
 api.add_namespace(name_space1)
