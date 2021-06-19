@@ -32,12 +32,14 @@ sortsc = api.model('lst', { 'array':fields.List(fields.Raw,required=True, descri
 @name_space1.route("/ListClass")
 class ListClass(Resource):
     @name_space1.doc("")
-    @name_space1.marshal_with(sortsc)
+    @name_space1.marshal_with(list_)
+    #@name_space1.marshal_with(sortsc)
     def get(self):
         """Получение всего хранимого массива"""
         global ls
-        idi=sorted(ls,key=lambda sick: sick['id'])
-        return {'array': idi}
+ '''       idi=sorted(ls,key=lambda sick: sick['id'])
+        return {'array': idi}'''
+        return ls
     @name_space1.doc("")
     # ожидаем на входе данных в соответствии с моделью list_
     @name_space1.expect(list_)
@@ -182,6 +184,7 @@ class getminRecovered(Resource):
         return {'val': mn}
 
     
+#REMOVING MAXIMUM DEATH
 @name_space1.route("/deletemaxDead")
 class deletemaxDead(Resource):
     @name_space1.doc("")
@@ -197,6 +200,18 @@ class deletemaxDead(Resource):
         return { 'array': ls}
     
     
+'''#STATISTICS
+# маршалинг данных в соответствии с list_
+@name_space1.marshal_with(list_)
+def patch(self):
+        """Изменение статистики по заболеваниям"""
+        global ls
+        aver=sum([sick['recovered'] for sick in ls ])/len(ls)
+        for sick in ls:
+          if(sick["recovered"] >= aver):
+            
+                return { 'array': ls}'''
+        
     
 api.add_namespace(name_space1)
 
