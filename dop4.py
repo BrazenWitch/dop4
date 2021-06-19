@@ -199,9 +199,14 @@ class deletemaxDead(Resource):
     
     
 #STATISTICS
-# маршалинг данных в соответствии с list_
-@name_space1.marshal_with(list_)
-def patch(self):
+@name_space1.route("/changeStatistic")
+class changeStatistic(Resourse):
+    @name_space1.doc("")
+    # ожидаем на входе данных в соответствии с моделью list_
+    @name_space1.expect(list_)
+    # маршалинг данных в соответствии с list_
+    @name_space1.marshal_with(list_)
+    def patch(self):
         """Изменение статистики по заболеваниям"""
         global ls
         aver=sum([sick['recovered'] for sick in ls ])/len(ls)
