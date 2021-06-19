@@ -12,6 +12,8 @@ class MainClass(Resource):
         return {"status": "Posted new data"}
     def patch(self):
         return {"status": "Patched new data"}
+    def put(self):
+        return {"status": "Put new data"}
 
 from flask_restplus import fields
 # определение модели данных массива
@@ -181,23 +183,18 @@ class getminRecovered(Resource):
         mn=min([sick['recovered'] for sick in ls ])
         return {'val': mn}
 
-    
 #REMOVING MAXIMUM DEATH
 @name_space1.route("/deletemaxDead")
 class deletemaxDead(Resource):
     @name_space1.doc("")
-    # маршаллинг данных в соответствии с моделью reqp
-    #@name_space1.expect(reqp)
     @name_space1.marshal_with(list_)
     def get(self):
         """Удаление страны с максимальным количеством умерших"""
         global ls
-        #args = reqp.parse_args()
         mx=max([sick['dead'] for sick in ls ])
         ls=[sick for sick in ls if sick['dead']!=mx]
         return { 'array': ls}
-    
-    
+      
 #STATISTICS
 @name_space1.route("/changeStatistic")
 class changeStatistic(Resource):
@@ -215,7 +212,25 @@ class changeStatistic(Resource):
             temp=sick["recovered"]/100*10
             sick["recovered"]=temp+sick["recovered"]
         return { 'array': ls}
-        
+    
+#CHANGE COUNTRY DATA
+@name_space1.route("/changedataCountry")
+class changedataCountry(Resource):
+    @name_space1.doc("")
+    # ожидаем на входе данных в соответствии с моделью list_
+    @name_space1.expect(list_)
+    # маршалинг данных в соответствии с list_
+    @name_space1.marshal_with(list_)
+    def put(self):
+        """Изменение данных по стране"""
+        global ls
+        for sick in ls:
+          if(api.payload['country'] == sick["country"]):
+            sick["id"] = api.payload['id']
+            sick["disease"] = api.payload['disease']
+            sick["recovered"] = api.payload['recovered']
+            sick["dead"] = api.payload['dead']
+        return { 'array': ls}
     
 api.add_namespace(name_space1)
 
