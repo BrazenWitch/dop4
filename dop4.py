@@ -177,6 +177,20 @@ class getminRecovered(Resource):
         mn=min([sick['recovered'] for sick in ls ])
         return {'val': mn}
 
+    
+@name_space1.route("/deletemaxDead")
+class deletemaxDead(Resource):
+    @name_space1.doc("")
+    # маршаллинг данных в соответствии с моделью minmax
+    @name_space1.marshal_with(oneval)
+    def delete(self):
+        """Удаление страны с максимальным количеством умерших"""
+        global ls
+        mn=min([sick['recovered'] for sick in ls ])
+        return {'val': mn}
+    
+    
+    
 api.add_namespace(name_space1)
 
 from flask_restplus import reqparse
@@ -188,7 +202,7 @@ reqp.add_argument('id', type=int, required=False)
 @name_space1.route("/chahgeDisease")
 class chahgeDiseaseClass(Resource):
     @name_space1.doc("")
-    # маршаллинг данных в соответствии с моделью minmax
+    # маршаллинг данных в соответствии с моделью reqp
     @name_space1.expect(reqp)
     @name_space1.marshal_with(list_)
     def get(self):
