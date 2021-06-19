@@ -37,8 +37,6 @@ class ListClass(Resource):
     def get(self):
         """Получение всего хранимого массива"""
         global ls
- '''       idi=sorted(ls,key=lambda sick: sick['id'])
-        return {'array': idi}'''
         return ls
     @name_space1.doc("")
     # ожидаем на входе данных в соответствии с моделью list_
