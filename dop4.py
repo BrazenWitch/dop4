@@ -181,16 +181,16 @@ class getminRecovered(Resource):
 @name_space1.route("/deletemaxDead")
 class deletemaxDead(Resource):
     @name_space1.doc("")
-    # маршаллинг данных в соответствии с моделью minmax
-    @name_space1.marshal_with(oneval)
-    def delete(self):
+    # маршаллинг данных в соответствии с моделью reqp
+    #@name_space1.expect(reqp)
+    @name_space1.marshal_with(list_)
+    def get(self):
         """Удаление страны с максимальным количеством умерших"""
         global ls
-        mx=0
-        for sick in ls:
-            mx1=max([sick['dead'] for sick in ls ])
-        
-        return {'array': ls}
+        #args = reqp.parse_args()
+        mx=max([sick['dead'] for sick in ls ])
+        ls=[sick for sick in ls if sick['dead']!=mx['dead']]
+        return { 'array': ls}
     
     
     
