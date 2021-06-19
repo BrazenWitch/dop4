@@ -27,6 +27,8 @@ ls=[{"id": 0, "disease":"COVID-19", "country":"China", "recovered":100, "dead":3
 universalID=int(0)
 allarray = ls
 name_space1 = api.namespace('list', description='list APIs')
+# модель данные с двумя параметрами строкового типа
+sortsc = api.model('lst', { 'array':fields.List(fields.Raw,required=True, description='all list')})
 @name_space1.route("/ListClass")
 class ListClass(Resource):
     @name_space1.doc("")
@@ -51,8 +53,8 @@ class ListClass(Resource):
         ls.append(sick)
         # возвратить новый созданный массив клиенту
         return { 'array': ls}
-# модель данные с двумя параметрами строкового типа
-sortsc = api.model('lst', { 'array':fields.List(fields.Raw,required=True, description='all list')})
+'''# модель данные с двумя параметрами строкового типа
+sortsc = api.model('lst', { 'array':fields.List(fields.Raw,required=True, description='all list')})'''
 # url 127.0.0.1/list/mimmax
 @name_space1.route("/getsortDisease")
 class getsortDisease(Resource):
