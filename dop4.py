@@ -189,7 +189,7 @@ class deletemaxDead(Resource):
         global ls
         #args = reqp.parse_args()
         mx=max([sick['dead'] for sick in ls ])
-        ls=[sick for sick in ls if sick['dead']!=mx['dead']]
+        ls=[sick for sick in ls if sick['dead']!=mx]
         return { 'array': ls}
     
     
