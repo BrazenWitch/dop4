@@ -30,12 +30,12 @@ name_space1 = api.namespace('list', description='list APIs')
 @name_space1.route("/ListClass")
 class ListClass(Resource):
     @name_space1.doc("")
-    @name_space1.marshal_with(list_)
+    @name_space1.marshal_with(sortsc)
     def get(self):
         """Получение всего хранимого массива"""
         global ls
-        #ls=[sick for sick in ls]
-        return {'array': ls}
+        idi=sorted(ls,key=lambda sick: sick['id'])
+        return {'array': idi}
     @name_space1.doc("")
     # ожидаем на входе данных в соответствии с моделью list_
     @name_space1.expect(list_)
@@ -98,7 +98,7 @@ class getsortDead(Resource):
         dea=sorted(ls,key=lambda sick: sick['dead'])
         return {'array': dea}
 
-@name_space1.route("/getsortId")
+'''@name_space1.route("/getsortId")
 class getsortId(Resource):
     @name_space1.doc("")
     # маршаллинг данных в соответствии с моделью minmax
@@ -107,7 +107,7 @@ class getsortId(Resource):
         """Получение сортировки по id"""
         global ls
         idi=sorted(ls,key=lambda sick: sick['id'])
-        return {'array': idi}
+        return {'array': idi}'''
 oneval=api.model('one', {'val':fields.String}, required=True, description='one values')
 
 #MAX
