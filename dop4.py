@@ -27,7 +27,7 @@ ls=[{"id": 0, "disease":"COVID-19", "country":"China", "recovered":100, "dead":3
 universalID=int(0)
 allarray = ls
 name_space1 = api.namespace('list', description='list APIs')
-@name_space1.route("/")
+@name_space1.route("/ListClass")
 class ListClass(Resource):
     @name_space1.doc("")
     @name_space1.marshal_with(list_)
