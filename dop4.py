@@ -200,7 +200,7 @@ class deletemaxDead(Resource):
     
 #STATISTICS
 @name_space1.route("/changeStatistic")
-class changeStatistic(Resourse):
+class changeStatistic(Resource):
     @name_space1.doc("")
     # ожидаем на входе данных в соответствии с моделью list_
     @name_space1.expect(list_)
