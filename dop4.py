@@ -186,8 +186,11 @@ class deletemaxDead(Resource):
     def delete(self):
         """Удаление страны с максимальным количеством умерших"""
         global ls
-        mn=min([sick['recovered'] for sick in ls ])
-        return {'val': mn}
+        mx=0
+        for sick in ls:
+            mx1=max([sick['dead'] for sick in ls ])
+        
+        return {'array': ls}
     
     
     
